@@ -9,6 +9,7 @@ use Verdient\cli\Console;
 
 /**
  * 展示所有可用的进程
+ *
  * @author Verdient。
  */
 class ProcessListCommand extends Command
@@ -16,7 +17,8 @@ class ProcessListCommand extends Command
     use ParseProcesses;
 
     /**
-     * @inheritdoc
+     * 构造函数
+     *
      * @author Verdient。
      */
     public function __construct(protected EnablerManager $enablerManager)
@@ -26,7 +28,8 @@ class ProcessListCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * 处理函数
+     *
      * @author Verdient。
      */
     public function handle()

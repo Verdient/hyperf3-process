@@ -6,13 +6,16 @@ namespace Verdient\Hyperf3\Process;
 
 /**
  * 工具
+ *
  * @author Verdient。
  */
 class Utils
 {
     /**
      * 简化名称
+     *
      * @param string $class 类名
+     *
      * @author Verdient。
      */
     public static function simplifyName(string $class): string

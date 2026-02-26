@@ -17,13 +17,14 @@ use function Hyperf\Support\make;
 
 /**
  * 解析进程
+ *
  * @author Verdient。
  */
 trait ParseProcesses
 {
     /**
      * 解析进程
-     * @return Crontab[]
+     *
      * @author Verdient。
      */
     protected function parseProcesses(): array

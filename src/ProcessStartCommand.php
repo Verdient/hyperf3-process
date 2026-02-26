@@ -6,11 +6,13 @@ namespace Verdient\Hyperf3\Process;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Hyperf\Command\Command;
+use Override;
 
 use function Hyperf\Support\make;
 
 /**
  * 启动进程
+ *
  * @author Verdient。
  */
 class ProcessStartCommand extends Command
@@ -18,7 +20,8 @@ class ProcessStartCommand extends Command
     use ParseProcesses;
 
     /**
-     * @inheritdoc
+     * 构造函数
+     *
      * @author Verdient。
      */
     public function __construct(protected EnablerManager $enablerManager)
@@ -28,7 +31,8 @@ class ProcessStartCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * 处理函数
+     *
      * @author Verdient。
      */
     public function handle()
@@ -45,6 +49,7 @@ class ProcessStartCommand extends Command
         }
 
         $name = $this->input->getArgument('name');
+
         if (empty($name)) {
             $choices = [];
             $maxLength = 0;
@@ -56,7 +61,7 @@ class ProcessStartCommand extends Command
             }
             $map = [];
             foreach ($processes as $key => $process) {
-                $description = $process['description'];
+                $description = $key . ' ' . $process['description'];
                 $choices[] = $description;
                 $map[$description] = $key;
             }
@@ -79,9 +84,9 @@ class ProcessStartCommand extends Command
     }
 
     /**
-     * @inheritdoc
      * @author Verdient。
      */
+    #[Override]
     protected function getArguments()
     {
         return [
