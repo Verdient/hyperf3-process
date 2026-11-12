@@ -22,29 +22,31 @@ class ConfigProvider
                 FailToHandleListener::class
             ],
             'logger' => [
-                ProcessInterface::class => (function (string $name) {
-                    $nameParts = array_map([Str::class, 'kebab'], explode('\\', Utils::simplifyName($name)));
+                'channels' => [
+                    ProcessInterface::class => (function (string $name) {
+                        $nameParts = array_map([Str::class, 'kebab'], explode('\\', Utils::simplifyName($name)));
 
-                    $filename = BASE_PATH . '/runtime/logs/process/' . implode('/', $nameParts) . '/.log';
+                        $filename = BASE_PATH . '/runtime/logs/process/' . implode('/', $nameParts) . '/.log';
 
-                    return [
-                        'handler' => [
-                            'class' => RotatingFileHandler::class,
-                            'constructor' => [
-                                'filename' => $filename,
-                                'filenameFormat' => '{date}'
+                        return [
+                            'handler' => [
+                                'class' => RotatingFileHandler::class,
+                                'constructor' => [
+                                    'filename' => $filename,
+                                    'filenameFormat' => '{date}'
+                                ],
                             ],
-                        ],
-                        'formatter' => [
-                            'class' => LineFormatter::class,
-                            'constructor' => [
-                                'format' => "%datetime% [%level_name%] %message%\n",
-                                'dateFormat' => 'Y-m-d H:i:s',
-                                'allowInlineLineBreaks' => true,
-                            ],
-                        ]
-                    ];
-                })->bindTo(null)
+                            'formatter' => [
+                                'class' => LineFormatter::class,
+                                'constructor' => [
+                                    'format' => "%datetime% [%level_name%] %message%\n",
+                                    'dateFormat' => 'Y-m-d H:i:s',
+                                    'allowInlineLineBreaks' => true,
+                                ],
+                            ]
+                        ];
+                    })->bindTo(null)
+                ],
             ],
             'annotations' => [
                 'scan' => [
